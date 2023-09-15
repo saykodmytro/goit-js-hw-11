@@ -5,6 +5,7 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import {
   onError,
+  onEmpty,
   addLoader,
   hideLoader,
   showMoreBtn,
@@ -13,7 +14,6 @@ import {
 } from './function';
 
 const pixabayApi = new PixabayAPI(40);
-let gallery = new SimpleLightbox('.gallery a');
 
 formEl.addEventListener('submit', onSubmit);
 loadMoreBtn.addEventListener('click', onMoreData);
@@ -24,22 +24,23 @@ async function onSubmit(evt) {
 
   const searchQuery =
     evt.currentTarget.elements['user-search-query'].value.trim();
-
-  if (!searchQuery) {
-    onError();
-  }
-
-  addLoader();
-
   pixabayApi.q = searchQuery;
+  if (pixabayApi.q === '') {
+    galleryEl.innerHTML = '';
+    return onEmpty();
+  }
 
   try {
     const resp = await pixabayApi.getPhotos();
     galleryEl.innerHTML = createGalleryCard(resp.hits);
-    if (getPhoto.query === '') {
-      Notify.warning('input is empty');
-      return;
+
+    if (resp.totalHits === 0) {
+      hideMoreBtn();
+      return onError();
     }
+
+    addLoader();
+
     messageTotalPhoto(resp.totalHits);
     resp.total > pixabayApi.perPage ? showMoreBtn() : hideMoreBtn();
 

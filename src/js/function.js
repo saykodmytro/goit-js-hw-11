@@ -11,12 +11,17 @@ export function onError() {
   );
 }
 
+export function onEmpty() {
+  return Notify.warning('Input is empty');
+}
+
 export function addLoader() {
   loaderEl.classList.add('active');
 }
 
 export function hideLoader() {
   loaderEl.classList.remove('active');
+  console.log('hideLoader');
 }
 
 export function hideMoreBtn() {
