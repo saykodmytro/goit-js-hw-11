@@ -1,11 +1,3 @@
-// https://pixabay.com/api/?key=39430730-0a1aacc0e107061ec7cb5615a&q="yellow+flower"&image_type=photo&orientation=horizontal&safesearch=true
-//
-// https://pixabay.com/api/
-// key  39430730-0a1aacc0e107061ec7cb5615a
-// q  'cat'
-// image_type   "photo"
-// orientation  "horizontal"
-// safesearch  "true"
 import axios from 'axios';
 
 export class PixabayAPI {
@@ -14,7 +6,7 @@ export class PixabayAPI {
 
   constructor(perPage) {
     this.page = 1;
-    this.q = '';
+    this.q = null;
     this.perPage = perPage;
   }
 
