@@ -17,12 +17,6 @@ const pixabayApi = new PixabayAPI(40);
 formEl.addEventListener('submit', onSubmit);
 loadMoreBtn.addEventListener('click', onMoreData);
 
-const lightbox = new SimpleLightbox('.galleryEl a', {
-  captionsData: 'alt',
-  captionPosition: 'bottom',
-  captionDelay: 250,
-});
-
 async function onSubmit(evt) {
   evt.preventDefault();
   pixabayApi.page = 1;
@@ -41,9 +35,20 @@ async function onSubmit(evt) {
   try {
     const resp = await pixabayApi.getPhotos();
     galleryEl.innerHTML = createGalleryCard(resp.hits);
+    if (getPhoto.query === '') {
+      Notify.warning('input is empty');
+      return;
+    }
     messageTotalPhoto(resp.totalHits);
-    hideLoader();
     resp.total > pixabayApi.perPage ? showMoreBtn() : hideMoreBtn();
+
+    hideLoader();
+
+    const lightbox = new SimpleLightbox('.gallery-img', {
+      captionsData: 'alt',
+      captionPosition: 'bottom',
+      captionDelay: 250,
+    });
   } catch (error) {
     console.log(error);
   }
@@ -59,6 +64,12 @@ async function onMoreData(evt) {
     if (averagePage === pixabayApi.page) {
       hideMoreBtn();
     }
+
+    const lightbox = new SimpleLightbox('.gallery-img', {
+      captionsData: 'alt',
+      captionPosition: 'bottom',
+      captionDelay: 250,
+    });
   } catch (error) {
     console.log(error);
   }
