@@ -1,5 +1,4 @@
 import createGalleryCard from '../templates/gallery-card.hbs';
-import { createCatInfo } from './createCard';
 import { PixabayAPI } from './pixabay-api';
 import { galleryEl, loadMoreBtn, loaderEl, formEl } from './refs';
 
@@ -21,7 +20,6 @@ function onSubmit(evt) {
   pixabayApi.q = searchQuery;
 
   pixabayApi.getPhotos().then(resp => {
-    // galleryEl.innerHTML = createCatInfo(resp.hits);
     galleryEl.innerHTML = createGalleryCard(resp.hits);
   });
 }
