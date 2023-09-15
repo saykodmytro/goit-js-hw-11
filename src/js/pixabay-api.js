@@ -10,8 +10,8 @@ export class PixabayAPI {
     this.perPage = perPage;
   }
 
-  getPhotos() {
-    return axios
+  async getPhotos() {
+    return await axios
       .get(`${this.#BASE_URL}`, {
         params: {
           q: this.q,
