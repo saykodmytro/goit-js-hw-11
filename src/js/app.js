@@ -13,6 +13,7 @@ import {
 } from './function';
 
 const pixabayApi = new PixabayAPI(40);
+let gallery = new SimpleLightbox('.gallery a');
 
 formEl.addEventListener('submit', onSubmit);
 loadMoreBtn.addEventListener('click', onMoreData);
@@ -43,12 +44,6 @@ async function onSubmit(evt) {
     resp.total > pixabayApi.perPage ? showMoreBtn() : hideMoreBtn();
 
     hideLoader();
-
-    const lightbox = new SimpleLightbox('.gallery-img', {
-      captionsData: 'alt',
-      captionPosition: 'bottom',
-      captionDelay: 250,
-    });
   } catch (error) {
     console.log(error);
   }
@@ -60,16 +55,11 @@ async function onMoreData(evt) {
   try {
     const resp = await pixabayApi.getPhotos();
     galleryEl.insertAdjacentHTML('beforeend', createGalleryCard(resp.hits));
+    gallery.refresh();
     const averagePage = Math.ceil(resp.total / pixabayApi.perPage);
     if (averagePage === pixabayApi.page) {
       hideMoreBtn();
     }
-
-    const lightbox = new SimpleLightbox('.gallery-img', {
-      captionsData: 'alt',
-      captionPosition: 'bottom',
-      captionDelay: 250,
-    });
   } catch (error) {
     console.log(error);
   }
