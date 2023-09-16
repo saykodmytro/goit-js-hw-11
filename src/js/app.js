@@ -56,7 +56,6 @@ async function onMoreData(evt) {
   try {
     const resp = await pixabayApi.getPhotos();
     galleryEl.insertAdjacentHTML('beforeend', createGalleryCard(resp.hits));
-    gallery.refresh();
     const averagePage = Math.ceil(resp.total / pixabayApi.perPage);
     if (averagePage === pixabayApi.page) {
       hideMoreBtn();
