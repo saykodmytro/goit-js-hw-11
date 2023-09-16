@@ -11,6 +11,7 @@ import {
   showMoreBtn,
   hideMoreBtn,
   messageTotalPhoto,
+  messageLastPage,
 } from './function';
 
 const pixabayApi = new PixabayAPI(40);
@@ -63,9 +64,9 @@ async function onMoreData(evt) {
     const resp = await pixabayApi.getPhotos();
     galleryEl.insertAdjacentHTML('beforeend', createGalleryCard(resp.hits));
     lightbox.refresh();
-    const averagePage = Math.ceil(resp.total / pixabayApi.perPage);
-    if (averagePage === pixabayApi.page) {
-      hideMoreBtn();
+    const lastPage = Math.ceil(resp.totalHits / pixabayApi.perPage);
+    if (lastPage === pixabayApi.page) {
+      messageLastPage();
     }
   } catch (error) {
     console.log(error);

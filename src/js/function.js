@@ -11,6 +11,12 @@ export function onError() {
     'Sorry, there are no images matching your search query. Please try again.'
   );
 }
+export function messageLastPage() {
+  loadMoreBtn.classList.add('is-hidden');
+  return Notify.failure(
+    "We're sorry, but you've reached the end of search results."
+  );
+}
 
 export function onEmpty() {
   loaderEl.classList.remove('active');
