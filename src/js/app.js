@@ -51,6 +51,7 @@ async function onSubmit(evt) {
 
     hideLoader();
   } catch (error) {
+    hideLoader();
     console.log(error);
   }
 }
