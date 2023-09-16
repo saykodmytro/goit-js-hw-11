@@ -6,23 +6,23 @@ export function messageTotalPhoto(obj) {
 }
 
 export function onError() {
+  loaderEl.classList.remove('active');
   return Notify.failure(
     'Sorry, there are no images matching your search query. Please try again.'
   );
 }
 
 export function onEmpty() {
+  loaderEl.classList.remove('active');
   return Notify.warning('Input is empty');
 }
 
 export function addLoader() {
   loaderEl.classList.add('active');
-  console.log('addloader');
 }
 
 export function hideLoader() {
   loaderEl.classList.remove('active');
-  console.log('hideLoader');
 }
 
 export function hideMoreBtn() {
