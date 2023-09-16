@@ -7,7 +7,6 @@ export function messageTotalPhoto(obj) {
 
 export function onError() {
   loaderEl.classList.remove('active');
-  console.log('remove-loader');
   return Notify.failure(
     'Sorry, there are no images matching your search query. Please try again.'
   );
