@@ -66,6 +66,7 @@ async function onMoreData(evt) {
     lightbox.refresh();
     const lastPage = Math.ceil(resp.totalHits / pixabayApi.perPage);
     if (lastPage === pixabayApi.page) {
+      console.log('message');
       messageLastPage();
     }
   } catch (error) {
