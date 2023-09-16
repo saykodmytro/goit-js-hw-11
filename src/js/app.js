@@ -34,17 +34,17 @@ async function onSubmit(evt) {
     galleryEl.innerHTML = '';
     return onEmpty();
   }
+  addLoader();
 
   try {
     const resp = await pixabayApi.getPhotos();
     galleryEl.innerHTML = createGalleryCard(resp.hits);
+    lightbox.refresh();
 
     if (resp.totalHits === 0) {
       hideMoreBtn();
       return onError();
     }
-
-    addLoader();
 
     messageTotalPhoto(resp.totalHits);
     resp.total > pixabayApi.perPage ? showMoreBtn() : hideMoreBtn();

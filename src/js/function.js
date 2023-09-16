@@ -17,6 +17,7 @@ export function onEmpty() {
 
 export function addLoader() {
   loaderEl.classList.add('active');
+  console.log('addloader');
 }
 
 export function hideLoader() {
