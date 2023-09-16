@@ -14,7 +14,11 @@ import {
 } from './function';
 
 const pixabayApi = new PixabayAPI(40);
-let gallery = new SimpleLightbox('.gallery a');
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
+});
 
 formEl.addEventListener('submit', onSubmit);
 loadMoreBtn.addEventListener('click', onMoreData);
@@ -57,7 +61,7 @@ async function onMoreData(evt) {
   try {
     const resp = await pixabayApi.getPhotos();
     galleryEl.insertAdjacentHTML('beforeend', createGalleryCard(resp.hits));
-    gallery.refresh();
+    lightbox.refresh();
     const averagePage = Math.ceil(resp.total / pixabayApi.perPage);
     if (averagePage === pixabayApi.page) {
       hideMoreBtn();
