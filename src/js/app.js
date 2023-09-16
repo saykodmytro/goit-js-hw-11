@@ -1,6 +1,6 @@
 import createGalleryCard from '../templates/gallery-card.hbs';
 import { PixabayAPI } from './pixabay-api';
-import { galleryEl, loadMoreBtn, loaderEl, formEl } from './refs';
+import { galleryEl, loadMoreBtn, formEl } from './refs';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import {
