@@ -12,6 +12,7 @@ import {
   hideMoreBtn,
   messageTotalPhoto,
   messageLastPage,
+  smoothScroll,
 } from './function';
 
 const pixabayApi = new PixabayAPI(40);
@@ -41,7 +42,7 @@ async function onSubmit(evt) {
     const resp = await pixabayApi.getPhotos();
     galleryEl.innerHTML = createGalleryCard(resp.hits);
     lightbox.refresh();
-
+    smoothScroll();
     if (resp.totalHits === 0) {
       hideMoreBtn();
       return onError();
@@ -64,6 +65,7 @@ async function onMoreData(evt) {
     const resp = await pixabayApi.getPhotos();
     galleryEl.insertAdjacentHTML('beforeend', createGalleryCard(resp.hits));
     lightbox.refresh();
+    smoothScroll();
     const lastPage = Math.ceil(resp.totalHits / pixabayApi.perPage);
     if (lastPage === pixabayApi.page) {
       console.log('message');
